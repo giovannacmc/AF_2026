@@ -1,0 +1,33 @@
+.item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-left: 8px solid #ccc;
+  border-radius: 6px;
+}
+
+.texto {
+  flex: 1;
+  min-width: 150px;
+}
+
+.texto p {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+.cor {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.acoes {
+  display: flex;
+  gap: 6px;
+}

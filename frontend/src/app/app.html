@@ -1,0 +1,45 @@
+<h1>Gestor Financeiro Pessoal</h1>
+
+<main>
+  @if (erro()) {
+    <p class="erro">{{ erro() }}</p>
+  }
+
+  <div class="resumo">
+    <div class="cartao">
+      Receitas
+      <strong class="receita">{{ receitas() | currency: 'BRL' }}</strong>
+    </div>
+    <div class="cartao">
+      Despesas
+      <strong class="despesa">{{ despesas() | currency: 'BRL' }}</strong>
+    </div>
+    <div class="cartao">
+      Saldo
+      <strong [class]="saldo() < 0 ? 'despesa' : 'receita'">{{ saldo() | currency: 'BRL' }}</strong>
+    </div>
+  </div>
+
+  <div class="colunas">
+    <div>
+      <app-formulario [emEdicao]="emEdicao()" (salvo)="aoSalvar()" (cancelado)="emEdicao.set(null)" />
+      <app-grafico [movimentacoes]="movimentacoes()" />
+    </div>
+
+    <div class="cartao">
+      <h2>Movimentações</h2>
+
+      <label>
+        Filtrar por categoria
+        <select #categoria (change)="filtro.set(categoria.value)">
+          <option value="">Todas</option>
+          @for (nome of categorias; track nome) {
+            <option [value]="nome">{{ nome }}</option>
+          }
+        </select>
+      </label>
+
+      <app-lista [movimentacoes]="filtradas()" (editar)="emEdicao.set($event)" (excluir)="excluir($event)" />
+    </div>
+  </div>
+</main>

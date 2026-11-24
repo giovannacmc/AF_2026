@@ -1,0 +1,40 @@
+h1 {
+  padding: 16px;
+  margin: 0;
+  color: white;
+  background: #14545c;
+  font-size: 22px;
+  text-align: center;
+}
+
+main {
+  max-width: 1100px;
+  padding: 16px;
+  margin: 0 auto;
+}
+
+.resumo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.resumo strong {
+  display: block;
+  font-size: 24px;
+}
+
+.colunas {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .resumo,
+  .colunas {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

@@ -1,0 +1,47 @@
+<div class="cartao">
+  <h2>{{ emEdicao ? 'Editar movimentação' : 'Nova movimentação' }}</h2>
+
+  <form #f="ngForm" (ngSubmit)="salvar()">
+    <label>
+      Tipo
+      <select name="tipo" [(ngModel)]="movimentacao().tipo" (change)="movimentacao().categoria = ''">
+        <option value="despesa">Despesa</option>
+        <option value="receita">Receita</option>
+      </select>
+    </label>
+
+    <label>
+      Descrição
+      <input type="text" name="descricao" [(ngModel)]="movimentacao().descricao" required />
+    </label>
+
+    <label>
+      Categoria
+      <select name="categoria" [(ngModel)]="movimentacao().categoria" required>
+        <option value="">Selecione</option>
+        @for (categoria of categorias[movimentacao().tipo]; track categoria) {
+          <option [value]="categoria">{{ categoria }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Valor (R$)
+      <input type="number" name="valor" [(ngModel)]="movimentacao().valor" min="0.01" step="0.01" required />
+    </label>
+
+    <label>
+      Data
+      <input type="date" name="data" [(ngModel)]="movimentacao().data" required />
+    </label>
+
+    @if (erro()) {
+      <p class="erro">{{ erro() }}</p>
+    }
+
+    <button type="submit" class="principal" [disabled]="f.invalid">Salvar</button>
+    @if (emEdicao) {
+      <button type="button" (click)="cancelar()">Cancelar</button>
+    }
+  </form>
+</div>

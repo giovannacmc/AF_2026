@@ -1,0 +1,22 @@
+@for (item of movimentacoes; track item._id) {
+  <div class="item" [style.border-left-color]="cores[item.categoria]">
+    <div class="texto">
+      <strong>{{ item.descricao }}</strong>
+      <p>
+        <span class="cor" [style.background]="cores[item.categoria]"></span>
+        {{ item.categoria }} - {{ item.data | date: 'dd/MM/yyyy' : 'UTC' }}
+      </p>
+    </div>
+
+    <strong [class]="item.tipo">
+      {{ item.tipo === 'receita' ? '+' : '-' }} {{ item.valor | currency: 'BRL' }}
+    </strong>
+
+    <div class="acoes">
+      <button (click)="editar.emit(item)">Editar</button>
+      <button (click)="excluir.emit(item)">Excluir</button>
+    </div>
+  </div>
+} @empty {
+  <p>Nenhuma movimentação encontrada.</p>
+}
